@@ -1,0 +1,569 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-gigo-chaos: "Comic Sans MS", "Papyrus", cursive;
+  --font-gigo-nightmare: "Impact", "Courier New", serif;
+
+  /* ── Brand palette ── */
+  --color-gigo-magenta: #e040fb;
+  --color-gigo-magenta-dim: #ab47bc;
+  --color-gigo-lime: #76ff03;
+  --color-gigo-lime-dim: #64dd17;
+  --color-gigo-cyan: #18ffff;
+  --color-gigo-cyan-dim: #00e5ff;
+  --color-gigo-yellow: #ffea00;
+  --color-gigo-orange: #ff6e40;
+  --color-gigo-pink: #ff4081;
+  --color-gigo-hotpink: #ff69b4;
+  --color-gigo-red: #ff1744;
+  --color-gigo-blue: #2979ff;
+  --color-gigo-tomato: #ff6347;
+
+  /* ── Surface palette ── */
+  --color-gigo-surface: #0a0a0f;
+  --color-gigo-surface-raised: #12121a;
+  --color-gigo-surface-overlay: #1a1a25;
+  --color-gigo-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-gigo-border-glow: rgba(224, 64, 251, 0.3);
+
+  /* ── Animations ── */
+  --animate-gigo-jitter: gigo-jitter 0.12s infinite;
+  --animate-gigo-wiggle: gigo-wiggle 0.5s ease-in-out infinite;
+  --animate-gigo-flash: gigo-flash 0.2s infinite;
+  --animate-gigo-shake: gigo-shake 0.5s infinite;
+  --animate-gigo-glitch: gigo-glitch 0.3s infinite;
+  --animate-gigo-chaos: gigo-chaos 1s ease-in-out infinite;
+  --animate-gigo-nightmare: gigo-nightmare 0.5s linear infinite;
+  --animate-gigo-teleport: gigo-teleport 2s ease-in-out infinite;
+  --animate-gigo-drunk: gigo-drunk 4s ease-in-out infinite;
+  --animate-gigo-float: gigo-float 6s ease-in-out infinite;
+  --animate-gigo-pulse-glow: gigo-pulse-glow 2s ease-in-out infinite;
+  --animate-gigo-gradient: gigo-gradient 8s ease infinite;
+  --animate-gigo-shimmer: gigo-shimmer 2s linear infinite;
+  --animate-gigo-entrance: gigo-entrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-gigo-border-spin: gigo-border-spin 4s linear infinite;
+  --animate-gigo-scanline: gigo-scanline 8s linear infinite;
+
+  @keyframes gigo-jitter {
+    0% {
+      transform: translate(0);
+    }
+    25% {
+      transform: translate(-2px, 2px);
+    }
+    50% {
+      transform: translate(2px, -2px);
+    }
+    75% {
+      transform: translate(-2px, -2px);
+    }
+    100% {
+      transform: translate(2px, 2px);
+    }
+  }
+  @keyframes gigo-wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+  @keyframes gigo-flash {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes gigo-shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-2px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(2px);
+    }
+  }
+  @keyframes gigo-glitch {
+    0% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+    20% {
+      transform: translate(-3px, 2px);
+      filter: hue-rotate(90deg);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+      filter: hue-rotate(180deg);
+    }
+    60% {
+      transform: translate(3px, 1px);
+      filter: hue-rotate(270deg);
+    }
+    80% {
+      transform: translate(2px, -2px);
+      filter: hue-rotate(360deg);
+    }
+    100% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+  }
+  @keyframes gigo-chaos {
+    0% {
+      transform: scale(1) rotate(0deg);
+      filter: hue-rotate(0deg);
+    }
+    25% {
+      transform: scale(1.1) rotate(5deg);
+      filter: hue-rotate(90deg);
+    }
+    50% {
+      transform: scale(0.95) rotate(-3deg);
+      filter: hue-rotate(180deg);
+    }
+    75% {
+      transform: scale(1.05) rotate(2deg);
+      filter: hue-rotate(270deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      filter: hue-rotate(360deg);
+    }
+  }
+  @keyframes gigo-nightmare {
+    0% {
+      transform: skewX(0deg) scale(1);
+      filter: hue-rotate(0deg) saturate(1) brightness(1);
+    }
+    20% {
+      transform: skewX(5deg) scale(1.05);
+      filter: hue-rotate(72deg) saturate(2) brightness(1.3);
+    }
+    40% {
+      transform: skewX(-4deg) scale(0.97);
+      filter: hue-rotate(144deg) saturate(0.5) brightness(0.8);
+    }
+    60% {
+      transform: skewX(3deg) scale(1.03);
+      filter: hue-rotate(216deg) saturate(3) brightness(1.1);
+    }
+    80% {
+      transform: skewX(-2deg) scale(0.99);
+      filter: hue-rotate(288deg) saturate(1.5) brightness(0.9);
+    }
+    100% {
+      transform: skewX(0deg) scale(1);
+      filter: hue-rotate(360deg) saturate(1) brightness(1);
+    }
+  }
+  @keyframes gigo-teleport {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    25% {
+      transform: translate(60px, -30px) scale(0.6);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translate(-50px, 50px) scale(1.3);
+      opacity: 0.2;
+    }
+    75% {
+      transform: translate(30px, -60px) scale(0.8);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes gigo-drunk {
+    0% {
+      transform: rotate(0deg) translateX(0);
+    }
+    25% {
+      transform: rotate(4deg) translateX(8px);
+    }
+    50% {
+      transform: rotate(-3deg) translateX(-4px);
+    }
+    75% {
+      transform: rotate(5deg) translateX(12px);
+    }
+    100% {
+      transform: rotate(0deg) translateX(0);
+    }
+  }
+  @keyframes gigo-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes gigo-pulse-glow {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes gigo-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes gigo-shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes gigo-entrance {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes gigo-border-spin {
+    from {
+      --gigo-angle: 0deg;
+    }
+    to {
+      --gigo-angle: 360deg;
+    }
+  }
+  @keyframes gigo-scanline {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes gigo-ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Dark-first design system  (GIGO is dark by nature)
+   ══════════════════════════════════════════════ */
+:root {
+  --background: #07070d;
+  --foreground: #ededf0;
+  --card: #0e0e16;
+  --card-foreground: #ededf0;
+  --primary: #e040fb;
+  --primary-foreground: #07070d;
+  --secondary: #1a1a28;
+  --secondary-foreground: #c4c4d0;
+  --muted: #14141e;
+  --muted-foreground: #7a7a8e;
+  --accent: #1e1e30;
+  --accent-foreground: #ededf0;
+  --destructive: #ff1744;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.07);
+  --input: rgba(255, 255, 255, 0.07);
+  --ring: #e040fb;
+  --glow-primary:
+    0 0 20px rgba(224, 64, 251, 0.35), 0 0 60px rgba(224, 64, 251, 0.1);
+  --glow-cyan:
+    0 0 20px rgba(24, 255, 255, 0.3), 0 0 60px rgba(24, 255, 255, 0.08);
+  --glow-lime:
+    0 0 20px rgba(118, 255, 3, 0.3), 0 0 60px rgba(118, 255, 3, 0.08);
+  --glow-destructive:
+    0 0 20px rgba(255, 23, 68, 0.35), 0 0 60px rgba(255, 23, 68, 0.1);
+
+  /* ── Surface elevation scale ── */
+  --surface-0: #07070d;
+  --surface-1: #0e0e16;
+  --surface-2: #14141e;
+  --surface-3: #1a1a28;
+  --surface-border-hover: rgba(255, 255, 255, 0.12);
+}
+
+.light {
+  --background: #fafafe;
+  --foreground: #0e0e16;
+  --card: #ffffff;
+  --card-foreground: #0e0e16;
+  --primary: #9c27b0;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f0f5;
+  --secondary-foreground: #2a2a3a;
+  --muted: #f4f4f8;
+  --muted-foreground: #6a6a7e;
+  --accent: #eeeef5;
+  --accent-foreground: #0e0e16;
+  --destructive: #d50000;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #9c27b0;
+
+  --surface-0: #fafafe;
+  --surface-1: #ffffff;
+  --surface-2: #f4f4f8;
+  --surface-3: #eeeef5;
+  --surface-border-hover: rgba(0, 0, 0, 0.15);
+}
+
+/* ── Base layer ── */
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(224, 64, 251, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(224, 64, 251, 0.45);
+}
+
+/* ══════════════════════════════════════════════
+   GIGO Utility Classes
+   ══════════════════════════════════════════════ */
+
+/* Animated gradient border wrapper */
+.gigo-gradient-border {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+.gigo-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--gigo-angle, 0deg),
+    #e040fb,
+    #18ffff,
+    #76ff03,
+    #ff4081,
+    #e040fb
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  animation: gigo-border-spin 4s linear infinite;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.gigo-gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* Glass panel */
+.gigo-glass {
+  background: rgba(14, 14, 22, 0.6);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Gradient text */
+.gigo-gradient-text {
+  background: linear-gradient(135deg, #e040fb 0%, #18ffff 50%, #76ff03 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gigo-gradient 6s ease infinite;
+}
+
+/* Neon glow text */
+.gigo-neon-text {
+  text-shadow:
+    0 0 7px rgba(224, 64, 251, 0.6),
+    0 0 20px rgba(224, 64, 251, 0.3),
+    0 0 42px rgba(224, 64, 251, 0.15);
+}
+
+/* Spotlight effect for cards */
+.gigo-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.gigo-spotlight::after {
+  content: "";
+  position: absolute;
+  top: var(--spotlight-y, -100%);
+  left: var(--spotlight-x, -100%);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle,
+    rgba(224, 64, 251, 0.12) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  transition:
+    top 0.1s,
+    left 0.1s;
+}
+
+/* Ripple effect */
+.gigo-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.gigo-ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(224, 64, 251, 0.3);
+  transform: scale(0);
+  animation: gigo-ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/* Shimmer overlay */
+.gigo-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.gigo-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  animation: gigo-shimmer 3s linear infinite;
+  pointer-events: none;
+}
+
+/* CRT scanline overlay */
+.gigo-scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+/* Mesh gradient background for the hero */
+.gigo-mesh-bg {
+  background:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(224, 64, 251, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(24, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 50% 80%,
+      rgba(118, 255, 3, 0.08) 0%,
+      transparent 50%
+    ),
+    var(--background);
+}
+
+/* Section divider with gradient */
+.gigo-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(224, 64, 251, 0.3),
+    rgba(24, 255, 255, 0.2),
+    transparent
+  );
+}
+
+/* Floating dot decorations */
+.gigo-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.4;
+  animation: gigo-float 6s ease-in-out infinite;
+}
