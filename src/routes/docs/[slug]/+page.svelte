@@ -15,6 +15,10 @@
 		ProgressDoom,
 		ColorPickerWrong,
 		TermsSidescroll,
+		GigoCompactor,
+		ShatterPane,
+		PixelDissolve,
+		BlackHoleSink,
 		Button,
 		Input,
 		Modal,
@@ -39,6 +43,18 @@
 	let volumeValue = $state(50);
 	let colorValue = $state('#e040fb');
 	let termsAccepted = $state(false);
+
+	// Breaker Overlay demo states
+	let compactorTriggered = $state(false);
+	let shatterTriggered    = $state(false);
+	let dissolveTriggered   = $state(false);
+	let blackholeTriggered  = $state(false);
+
+	// Breaker refs for imperative control
+	let compactorRef: any = $state(null);
+	let shatterRef: any   = $state(null);
+	let dissolveRef: any  = $state(null);
+	let blackholeRef: any = $state(null);
 
 	const demoSlides: CarouselSlide[] = [
 		{ id: '1', content: 'Slide 1 — Everything is fine.' },
@@ -263,6 +279,78 @@
 						<p class="mt-3 text-xs font-mono text-(--muted-foreground) text-center">
 							Accepted: <span class="{termsAccepted ? 'text-gigo-lime' : 'text-gigo-magenta'}">{termsAccepted}</span>
 						</p>
+					</div>
+
+				{:else if slug === 'gigo-compactor'}
+					<div class="flex flex-col items-center gap-6">
+						<GigoCompactor bind:this={compactorRef} bind:isGarbage={compactorTriggered} cols={22} rows={22} intensity={8}>
+							<div class="rounded-xl border border-(--border) bg-(--surface-1) p-6 max-w-sm text-center">
+								<div class="text-4xl mb-3">🏗️</div>
+								<h3 class="font-bold text-lg mb-1">Structurally Sound</h3>
+								<p class="text-sm text-(--muted-foreground)">This card is definitely safe. Nothing bad will happen.</p>
+							</div>
+						</GigoCompactor>
+						<div class="flex items-center gap-4">
+							{#if !compactorTriggered}
+								<Button variant="destructive" onclick={() => compactorRef?.crush()}>💥 Demolish</Button>
+							{:else}
+								<button class="text-xs text-(--muted-foreground) underline" onclick={() => { compactorRef?.restore(); compactorTriggered = false; }}>Reset</button>
+							{/if}
+						</div>
+					</div>
+
+				{:else if slug === 'shatter-pane'}
+					<div class="flex flex-col items-center gap-6">
+						<ShatterPane bind:this={shatterRef} bind:isShattered={shatterTriggered} shardCount={64} intensity={8}>
+							<div class="rounded-xl border border-(--border) bg-(--surface-1) p-6 max-w-sm text-center">
+								<div class="text-4xl mb-3">🪟</div>
+								<h3 class="font-bold text-lg mb-1">Tempered Glass</h3>
+								<p class="text-sm text-(--muted-foreground)">Rated for 10,000 accidental taps.</p>
+							</div>
+						</ShatterPane>
+						<div class="flex items-center gap-4">
+							{#if !shatterTriggered}
+								<Button variant="destructive" onclick={() => shatterRef?.shatter()}>🪟 Shatter</Button>
+							{:else}
+								<button class="text-xs text-(--muted-foreground) underline" onclick={() => { shatterRef?.restore(); shatterTriggered = false; }}>Reset</button>
+							{/if}
+						</div>
+					</div>
+
+				{:else if slug === 'pixel-dissolve'}
+					<div class="flex flex-col items-center gap-6">
+						<PixelDissolve bind:this={dissolveRef} bind:isDead={dissolveTriggered} resolution={2} waveSeed={12} intensity={7}>
+							<div class="rounded-xl border border-(--border) bg-(--surface-1) p-6 max-w-sm text-center">
+								<div class="text-4xl mb-3">✨</div>
+								<h3 class="font-bold text-lg mb-1">Dusted</h3>
+								<p class="text-sm text-(--muted-foreground)">Half the universe, disintegrated.</p>
+							</div>
+						</PixelDissolve>
+						<div class="flex items-center gap-4">
+							{#if !dissolveTriggered}
+								<Button variant="destructive" onclick={() => dissolveRef?.dissolve()}>✨ Snap</Button>
+							{:else}
+								<button class="text-xs text-(--muted-foreground) underline" onclick={() => { dissolveRef?.restore(); dissolveTriggered = false; }}>Reset</button>
+							{/if}
+						</div>
+					</div>
+
+				{:else if slug === 'black-hole-sink'}
+					<div class="flex flex-col items-center gap-6">
+						<BlackHoleSink bind:this={blackholeRef} bind:isConsumed={blackholeTriggered} intensity={8} glowColor="rgba(255,140,0,0.8)">
+							<div class="rounded-xl border border-(--border) bg-(--surface-1) p-6 max-w-sm text-center">
+								<div class="text-4xl mb-3">🌑</div>
+								<h3 class="font-bold text-lg mb-1">Event Horizon</h3>
+								<p class="text-sm text-(--muted-foreground)">Not even light can escape this card.</p>
+							</div>
+						</BlackHoleSink>
+						<div class="flex items-center gap-4">
+							{#if !blackholeTriggered}
+								<Button variant="destructive" onclick={() => blackholeRef?.consume()}>🌑 Consume</Button>
+							{:else}
+								<button class="text-xs text-(--muted-foreground) underline" onclick={() => { blackholeRef?.restore(); blackholeTriggered = false; }}>Reset</button>
+							{/if}
+						</div>
 					</div>
 				{/if}
 			</div>

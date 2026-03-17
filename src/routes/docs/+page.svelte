@@ -2,25 +2,28 @@
 	import { categories, getComponentsByCategory } from '$lib/docs/component-data.js';
 
 	const quickStartCode = `<script lang="ts">
-  import { GhostCard, CatchSubmit } from '@gigo-ui/components';
+  import { ShatterPane, CatchSubmit } from '@gigo-ui/components';
+
+  let broken = $state(false);
 <\/script>
 
-<GhostCard
-  title="Important Data"
-  description="This will vanish when you need it most."
-/>
+<ShatterPane bind:isShattered={broken}>
+  <div class="card">
+    <h2>Fragile Content</h2>
+    <CatchSubmit label="Submit" />
+  </div>
+</ShatterPane>
 
-<CatchSubmit
-  label="Submit"
-  onsubmit={() => alert('Caught!')}
-/>`;
+<button onclick={() => broken = true}>
+  Break it
+</button>`;
 </script>
 
 <div class="mx-auto max-w-3xl space-y-12">
 	<div>
 		<h1 class="text-3xl font-black tracking-tight">Getting Started</h1>
 		<p class="mt-3 text-(--muted-foreground) leading-relaxed">
-			GIGO UI is a Svelte 5 component library of intentionally terrible UI patterns. Every component is a fully functional, production-quality implementation of the worst UX ideas from <em>r/badUIbattles</em>.
+			GIGO UI is a Svelte 5 component library of intentionally terrible UI patterns. Every component is production-quality code implementing the worst UX ideas imaginable.
 		</p>
 	</div>
 
@@ -28,28 +31,50 @@
 	<section class="space-y-4">
 		<h2 class="text-xl font-bold tracking-tight">Installation</h2>
 		<div class="rounded-lg border border-(--border) bg-(--surface-1) p-4">
-			<pre class="font-mono text-sm text-(--foreground)"><span class="text-(--muted-foreground)">$</span> npm install @gigo-ui/components</pre>
+			<pre class="font-mono text-sm text-(--foreground)"><span class="text-(--muted-foreground)">$</span> pnpm add @gigo-ui/components</pre>
 		</div>
-		<p class="text-sm text-(--muted-foreground)">Or with your preferred package manager:</p>
-		<div class="space-y-2">
-			<div class="rounded-lg border border-(--border) bg-(--surface-1) p-3">
-				<pre class="font-mono text-sm"><span class="text-(--muted-foreground)">$</span> pnpm add @gigo-ui/components</pre>
-			</div>
-			<div class="rounded-lg border border-(--border) bg-(--surface-1) p-3">
-				<pre class="font-mono text-sm"><span class="text-(--muted-foreground)">$</span> yarn add @gigo-ui/components</pre>
-			</div>
-		</div>
+		<p class="text-sm text-(--muted-foreground)">Works with npm, yarn, and bun too.</p>
 	</section>
 
 	<!-- Quick Start -->
 	<section class="space-y-4">
 		<h2 class="text-xl font-bold tracking-tight">Quick Start</h2>
-		<p class="text-sm text-(--muted-foreground)">Import any component and start frustrating your users immediately:</p>
+		<p class="text-sm text-(--muted-foreground)">Import, wrap, destroy:</p>
 		<div class="rounded-lg border border-(--border) bg-(--surface-1) overflow-hidden">
 			<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2">
 				<span class="text-xs font-mono text-(--muted-foreground)">App.svelte</span>
 			</div>
 			<pre class="p-4 font-mono text-sm leading-relaxed overflow-x-auto text-(--foreground)">{quickStartCode}</pre>
+		</div>
+	</section>
+
+	<!-- Breaker Overlays — featured -->
+	<section class="space-y-4">
+		<div>
+			<p class="text-xs font-semibold uppercase tracking-widest text-gigo-cyan">New</p>
+			<h2 class="mt-1 text-xl font-bold tracking-tight">Breaker Overlays</h2>
+			<p class="mt-1 text-sm text-(--muted-foreground)">
+				Wrap any component. One call and it's physically destroyed with real-time physics. Broken things stay broken.
+			</p>
+		</div>
+		<div class="grid gap-3 sm:grid-cols-2">
+			{#each [
+				{ slug: 'gigo-compactor', emoji: '🧊', name: 'GigoCompactor', desc: 'Three.js voxel crush with Rapier rigid bodies' },
+				{ slug: 'shatter-pane', emoji: '🪟', name: 'ShatterPane', desc: 'Voronoi glass fracture, cracks outward and falls' },
+				{ slug: 'pixel-dissolve', emoji: '🌫️', name: 'PixelDissolve', desc: 'Per-pixel dissolution in contagion waves' },
+				{ slug: 'black-hole-sink', emoji: '🕳️', name: 'BlackHoleSink', desc: 'Singularity with accretion disk and redshift' },
+			] as card}
+				<a
+					href="/docs/{card.slug}"
+					class="flex items-start gap-3 rounded-lg border border-gigo-cyan/20 bg-gigo-cyan/5 p-4 transition-all hover:border-gigo-cyan/40 hover:bg-gigo-cyan/10"
+				>
+					<span class="text-xl">{card.emoji}</span>
+					<div>
+						<div class="text-sm font-bold">{card.name}</div>
+						<div class="text-xs text-(--muted-foreground)">{card.desc}</div>
+					</div>
+				</a>
+			{/each}
 		</div>
 	</section>
 
@@ -74,9 +99,9 @@
 		</div>
 	</section>
 
-	<!-- Components Overview -->
+	<!-- All Components -->
 	<section class="space-y-6">
-		<h2 class="text-xl font-bold tracking-tight">Components</h2>
+		<h2 class="text-xl font-bold tracking-tight">All Components</h2>
 		{#each categories as cat}
 			{@const components = getComponentsByCategory(cat.id)}
 			<div class="space-y-3">

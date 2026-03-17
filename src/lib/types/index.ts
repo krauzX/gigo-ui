@@ -232,3 +232,41 @@ export interface GigoTermsSidescrollProps {
 }
 
 export type ChaosIntensity = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+// ─── Breaker Overlay family ───────────────────────────────────────────────────
+
+export interface GigoCompactorProps {
+  isGarbage?: boolean;
+  cols?: number;
+  rows?: number;
+  intensity?: number; // 0–10
+  debugMode?: boolean;
+  class?: string;
+}
+
+export interface ShatterPaneProps {
+  isShattered?: boolean;
+  shardCount?: number;
+  intensity?: number;
+  tint?: string;
+  debugMode?: boolean;
+  class?: string;
+}
+
+export interface PixelDissolveProps {
+  isDead?: boolean;
+  resolution?: number;
+  waveSeed?: number;
+  intensity?: number;
+  debugMode?: boolean;
+  class?: string;
+}
+
+export interface BlackHoleSinkProps {
+  isConsumed?: boolean;
+  resolution?: number;
+  intensity?: number;
+  glowColor?: string;
+  debugMode?: boolean;
+  class?: string;
+}

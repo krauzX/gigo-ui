@@ -14,6 +14,10 @@ import { colorPickerWrong } from "./components/badui/color-picker-wrong.js";
 import { termsSidescroll } from "./components/badui/terms-sidescroll.js";
 import { chaosButton } from "./components/chaos/chaos-button.js";
 import { chaosForm } from "./components/chaos/chaos-form.js";
+import { gigoCompactor } from "./components/chaos/gigo-compactor.js";
+import { shatterPane } from "./components/chaos/shatter-pane.js";
+import { pixelDissolve } from "./components/chaos/pixel-dissolve.js";
+import { blackHoleSink } from "./components/chaos/black-hole-sink.js";
 import { button } from "./components/standard/button.js";
 import { input } from "./components/standard/input.js";
 import { modal } from "./components/standard/modal.js";
@@ -38,6 +42,10 @@ export const componentDocs: ComponentDoc[] = [
   termsSidescroll,
   chaosButton,
   chaosForm,
+  gigoCompactor,
+  shatterPane,
+  pixelDissolve,
+  blackHoleSink,
   button,
   input,
   modal,

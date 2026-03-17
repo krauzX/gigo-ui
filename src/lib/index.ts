@@ -19,6 +19,10 @@ export { default as VolumeSlider } from "./components/chaos/VolumeSlider.svelte"
 export { default as ProgressDoom } from "./components/chaos/ProgressDoom.svelte";
 export { default as ColorPickerWrong } from "./components/chaos/ColorPickerWrong.svelte";
 export { default as TermsSidescroll } from "./components/chaos/TermsSidescroll.svelte";
+export { default as GigoCompactor } from "./components/chaos/GigoCompactor.svelte";
+export { default as ShatterPane } from "./components/chaos/ShatterPane.svelte";
+export { default as PixelDissolve } from "./components/chaos/PixelDissolve.svelte";
+export { default as BlackHoleSink } from "./components/chaos/BlackHoleSink.svelte";
 
 export type {
   GigoBaseProps,
@@ -42,6 +46,10 @@ export type {
   GigoProgressDoomProps,
   GigoColorPickerWrongProps,
   GigoTermsSidescrollProps,
+  GigoCompactorProps,
+  ShatterPaneProps,
+  PixelDissolveProps,
+  BlackHoleSinkProps,
   ButtonVariant,
   ButtonSize,
   InputType,
