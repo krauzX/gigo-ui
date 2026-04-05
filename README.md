@@ -20,10 +20,36 @@ Built with modern runes (`$state`, `$derived`, `$effect`, `$bindable`), TypeScri
 pnpm add @gigo-ui/components
 ```
 
+## Styles (Required)
+
+Import the package stylesheet once near your app root:
+
+```svelte
+<script lang="ts">
+  import '@gigo-ui/components/globals.css';
+</script>
+```
+
+The stylesheet includes Tailwind v4 directives and `@source` scanning for this package, so utility classes used inside components are generated in consumer builds.
+
+To customize theme tokens, override variables after importing the package CSS:
+
+```css
+/* app.css */
+@import "@gigo-ui/components/globals.css";
+
+:root {
+  --primary: #2563eb;
+  --background: #ffffff;
+  --foreground: #111827;
+}
+```
+
 ## Quick Start
 
 ```svelte
 <script lang="ts">
+  import '@gigo-ui/components/globals.css';
   import { ShatterPane, CatchSubmit } from '@gigo-ui/components';
 
   let broken = $state(false);
