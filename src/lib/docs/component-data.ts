@@ -12,6 +12,9 @@ import { volumeSlider } from "./components/badui/volume-slider.js";
 import { progressDoom } from "./components/badui/progress-doom.js";
 import { colorPickerWrong } from "./components/badui/color-picker-wrong.js";
 import { termsSidescroll } from "./components/badui/terms-sidescroll.js";
+import { cookieMonster } from "./components/badui/cookie-monster.js";
+import { notificationStorm } from "./components/badui/notification-storm.js";
+import { captchaFromHell } from "./components/badui/captcha-from-hell.js";
 import { chaosButton } from "./components/chaos/chaos-button.js";
 import { chaosForm } from "./components/chaos/chaos-form.js";
 import { gigoCompactor } from "./components/chaos/gigo-compactor.js";
@@ -46,6 +49,9 @@ export const componentDocs: ComponentDoc[] = [
   shatterPane,
   pixelDissolve,
   blackHoleSink,
+  cookieMonster,
+  notificationStorm,
+  captchaFromHell,
   button,
   input,
   modal,

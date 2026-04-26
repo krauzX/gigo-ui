@@ -23,6 +23,9 @@ export { default as GigoCompactor } from "./components/chaos/GigoCompactor.svelt
 export { default as ShatterPane } from "./components/chaos/ShatterPane.svelte";
 export { default as PixelDissolve } from "./components/chaos/PixelDissolve.svelte";
 export { default as BlackHoleSink } from "./components/chaos/BlackHoleSink.svelte";
+export { default as CookieMonster } from "./components/chaos/CookieMonster.svelte";
+export { default as NotificationStorm } from "./components/chaos/NotificationStorm.svelte";
+export { default as CaptchaFromHell } from "./components/chaos/CaptchaFromHell.svelte";
 
 export type {
   GigoBaseProps,
@@ -50,6 +53,9 @@ export type {
   ShatterPaneProps,
   PixelDissolveProps,
   BlackHoleSinkProps,
+  GigoCookieMonsterProps,
+  GigoNotificationStormProps,
+  GigoCaptchaFromHellProps,
   ButtonVariant,
   ButtonSize,
   InputType,

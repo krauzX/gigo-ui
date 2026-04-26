@@ -270,3 +270,24 @@ export interface BlackHoleSinkProps {
   debugMode?: boolean;
   class?: string;
 }
+
+// ─── Trending BadUI components ────────────────────────────────────────────────
+
+export interface GigoCookieMonsterProps {
+  visible?: boolean;
+  onaccept?: () => void;
+  onreject?: () => void;
+  class?: string;
+}
+
+export interface GigoNotificationStormProps {
+  autoStart?: boolean;
+  maxVisible?: number;
+  class?: string;
+}
+
+export interface GigoCaptchaFromHellProps {
+  onverify?: () => void;
+  class?: string;
+}
+

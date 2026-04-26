@@ -19,6 +19,9 @@
 		ShatterPane,
 		PixelDissolve,
 		BlackHoleSink,
+		CookieMonster,
+		NotificationStorm,
+		CaptchaFromHell,
 		Button,
 		Input,
 		Modal,
@@ -43,6 +46,9 @@
 	let volumeValue = $state(50);
 	let colorValue = $state('#e040fb');
 	let termsAccepted = $state(false);
+
+	// New component states
+	let cookieVisible = $state(false);
 
 	// Breaker Overlay demo states
 	let compactorTriggered = $state(false);
@@ -351,6 +357,26 @@
 								<button class="text-xs text-(--muted-foreground) underline" onclick={() => { blackholeRef?.restore(); blackholeTriggered = false; }}>Reset</button>
 							{/if}
 						</div>
+					</div>
+				{:else if slug === 'cookie-monster'}
+					<div class="flex flex-col items-center gap-4">
+						<p class="text-sm text-(--muted-foreground)">Click below to unleash the cookie banner from hell.</p>
+						<Button onclick={() => cookieVisible = true}>🍪 Show Cookie Banner</Button>
+						<CookieMonster
+							bind:visible={cookieVisible}
+							onaccept={() => alert('You accepted (or were tricked). Either way, we win.')}
+							onreject={() => alert('Impossible! You actually rejected?!')}
+						/>
+					</div>
+
+				{:else if slug === 'notification-storm'}
+					<div class="max-w-md mx-auto">
+						<NotificationStorm autoStart maxVisible={6} />
+					</div>
+
+				{:else if slug === 'captcha-from-hell'}
+					<div class="max-w-sm mx-auto">
+						<CaptchaFromHell onverify={() => alert('Verified! ...somehow.')} />
 					</div>
 				{/if}
 			</div>
