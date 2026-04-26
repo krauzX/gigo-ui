@@ -99,6 +99,9 @@ Technically functional. Emotionally devastating.
 | **VolumeSlider**     | Deliberately confusing volume control     |
 | **ColorPickerWrong** | Color picker that picks the wrong color   |
 | **TermsSidescroll**  | Terms of service in a horizontal scroller |
+| **CookieMonster**    | Cookie banner from hell with dark patterns |
+| **NotificationStorm**| Toast notifications that multiply on dismiss|
+| **CaptchaFromHell**  | Impossible multi-stage CAPTCHA verification |
 
 ### 🛠 Standard (The Bait)
 
