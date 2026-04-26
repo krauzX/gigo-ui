@@ -1,5 +1,17 @@
 <script lang="ts">
-	import { CatchSubmit } from '$lib/index.js';
+	import {
+		CatchSubmit,
+		RotaryDial,
+		GravityInput,
+		ProgressDoom,
+		PasswordPeekhole,
+		NotificationStorm,
+		CaptchaFromHell,
+		CookieMonster,
+		GhostCard,
+		ShatterPane,
+		Button
+	} from '$lib/index.js';
 	import { categories, getComponentsByCategory } from '$lib/docs/component-data.js';
 
 	const testimonials = [
@@ -10,6 +22,14 @@
 		{ name: 'Jake T.', role: 'Intern', quote: "They told me to build a form with this. I'm updating my LinkedIn." },
 		{ name: 'Lena W.', role: 'Product Manager', quote: "Our NPS score went from 72 to -4. Impressive, honestly." },
 	];
+
+	// Demo states
+	let rotaryValue = $state('');
+	let gravityValue = $state('');
+	let passwordValue = $state('');
+	let cookieVisible = $state(false);
+	let shatterRef: any = $state(null);
+	let shatterTriggered = $state(false);
 </script>
 
 <div>
@@ -51,7 +71,7 @@
 		<!-- Stats — compact strip -->
 		<section class="grid grid-cols-4 gap-3 py-12">
 			{#each [
-				{ value: '24', label: 'Components', color: 'text-gigo-magenta' },
+				{ value: '27', label: 'Components', color: 'text-gigo-magenta' },
 				{ value: '4', label: 'Breaker Overlays', color: 'text-gigo-cyan' },
 				{ value: 'v5', label: 'Svelte', color: 'text-gigo-lime' },
 				{ value: '0', label: 'Good UX', color: 'text-gigo-pink' },
@@ -118,14 +138,217 @@
 
 		<div class="gigo-divider"></div>
 
-		<!-- One live demo — keep it tight -->
+		<!-- ═══════════════════════════════════════════════ -->
+		<!-- INTERACTIVE DEMOS SHOWCASE                      -->
+		<!-- ═══════════════════════════════════════════════ -->
 		<section class="py-14">
 			<div class="text-center">
-				<h2 class="text-2xl font-bold tracking-tight">Try It</h2>
-				<p class="mt-2 text-sm text-(--muted-foreground)">Go ahead. Try to submit the form.</p>
+				<p class="text-xs font-semibold uppercase tracking-widest text-gigo-magenta">Live Playground</p>
+				<h2 class="mt-2 text-2xl font-bold tracking-tight">Try the Madness</h2>
+				<p class="mx-auto mt-2 max-w-lg text-sm text-(--muted-foreground)">
+					Every component below is fully interactive. Go ahead — try to accomplish something simple.
+				</p>
 			</div>
-			<div class="mx-auto mt-8 max-w-md">
-				<CatchSubmit label="Submit Form" onsubmit={() => alert('You caught it! 🎉')} />
+
+			<div class="mt-10 grid gap-6 sm:grid-cols-2">
+				<!-- Demo 1: CatchSubmit -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">🏃</span>
+						<span class="text-xs font-semibold">CatchSubmit</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Try to click it</span>
+					</div>
+					<div class="p-6 flex items-center justify-center" style="min-height: 120px;">
+						<CatchSubmit label="Submit Form" onsubmit={() => alert('You caught it! 🎉')} />
+					</div>
+				</div>
+
+				<!-- Demo 2: RotaryDial -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">📞</span>
+						<span class="text-xs font-semibold">RotaryDial</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Drag to dial</span>
+					</div>
+					<div class="p-6 flex flex-col items-center gap-3">
+						<RotaryDial bind:value={rotaryValue} />
+						{#if rotaryValue}
+							<p class="text-xs font-mono text-(--muted-foreground)">
+								Dialed: <span class="text-gigo-cyan">{rotaryValue}</span>
+							</p>
+						{/if}
+					</div>
+				</div>
+
+				<!-- Demo 3: GravityInput -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">🌍</span>
+						<span class="text-xs font-semibold">GravityInput</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Characters have weight</span>
+					</div>
+					<div class="p-6">
+						<GravityInput bind:value={gravityValue} placeholder="Type something..." />
+						{#if gravityValue}
+							<p class="mt-3 text-xs font-mono text-(--muted-foreground)">
+								Captured: <span class="text-gigo-cyan">{gravityValue}</span>
+							</p>
+						{/if}
+					</div>
+				</div>
+
+				<!-- Demo 4: PasswordPeekhole -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">🔑</span>
+						<span class="text-xs font-semibold">PasswordPeekhole</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Drag the peephole</span>
+					</div>
+					<div class="p-6">
+						<PasswordPeekhole bind:value={passwordValue} placeholder="Enter your secret..." />
+					</div>
+				</div>
+
+				<!-- Demo 5: ProgressDoom (full width) -->
+				<div class="sm:col-span-2 rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">📊</span>
+						<span class="text-xs font-semibold">ProgressDoom</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Watch it never finish</span>
+					</div>
+					<div class="p-6 max-w-lg mx-auto">
+						<ProgressDoom targetMs={10000} onComplete={() => alert('Somehow it finished!')} />
+					</div>
+				</div>
+
+				<!-- Demo 6: GhostCard -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">👻</span>
+						<span class="text-xs font-semibold">GhostCard</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Now you see it...</span>
+					</div>
+					<div class="p-6">
+						<GhostCard title="Important Data" description="This content may vanish at any moment. Try reading it quickly." />
+					</div>
+				</div>
+
+				<!-- Demo 7: ShatterPane -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">🪟</span>
+						<span class="text-xs font-semibold">ShatterPane</span>
+						<span class="ml-auto text-[10px] text-(--muted-foreground)">Break it</span>
+					</div>
+					<div class="p-6 flex flex-col items-center gap-4">
+						<ShatterPane bind:this={shatterRef} bind:isShattered={shatterTriggered} shardCount={48} intensity={7}>
+							<div class="rounded-lg border border-(--border) bg-(--surface-2) p-4 text-center">
+								<div class="text-2xl mb-1">🏗️</div>
+								<p class="text-xs font-semibold">Structurally Sound™</p>
+								<p class="text-[10px] text-(--muted-foreground)">Definitely safe.</p>
+							</div>
+						</ShatterPane>
+						{#if !shatterTriggered}
+							<Button variant="destructive" onclick={() => shatterRef?.shatter()}>🪟 Shatter</Button>
+						{:else}
+							<button class="text-xs text-(--muted-foreground) underline" onclick={() => { shatterRef?.restore(); shatterTriggered = false; }}>Reset</button>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="gigo-divider"></div>
+
+		<!-- ═══════════════════════════════════════════════ -->
+		<!-- NEW: Trending BadUI Showcase                    -->
+		<!-- ═══════════════════════════════════════════════ -->
+		<section class="py-14">
+			<div class="text-center">
+				<p class="text-xs font-semibold uppercase tracking-widest text-gigo-orange">Trending</p>
+				<h2 class="mt-2 text-2xl font-bold tracking-tight">Dark Pattern Hall of Fame</h2>
+				<p class="mx-auto mt-2 max-w-lg text-sm text-(--muted-foreground)">
+					Inspired by the internet's worst UX offenders. These components are love letters to dark patterns.
+				</p>
+			</div>
+
+			<div class="mt-10 space-y-6">
+				<!-- Cookie Monster -->
+				<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+					<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+						<span class="text-xs">🍪</span>
+						<span class="text-xs font-semibold">CookieMonster</span>
+						<span class="ml-auto rounded-md bg-gigo-orange/10 px-2 py-0.5 text-[10px] font-medium text-gigo-orange">New</span>
+					</div>
+					<div class="p-6 flex flex-col items-center gap-3">
+						<p class="text-sm text-(--muted-foreground) text-center max-w-md">
+							The cookie consent banner from hell. Giant "Accept All", microscopic fleeing "Reject", and a fake ✕ that secretly accepts.
+						</p>
+						<Button onclick={() => cookieVisible = true}>🍪 Unleash the Cookie Banner</Button>
+						<CookieMonster
+							bind:visible={cookieVisible}
+							onaccept={() => alert('Cookies accepted! (Or were they? 😈)')}
+							onreject={() => alert('You actually rejected? Impossible!')}
+						/>
+					</div>
+				</div>
+
+				<!-- Notification Storm + Captcha side by side -->
+				<div class="grid gap-6 sm:grid-cols-2">
+					<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+						<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+							<span class="text-xs">🔔</span>
+							<span class="text-xs font-semibold">NotificationStorm</span>
+							<span class="ml-auto rounded-md bg-gigo-orange/10 px-2 py-0.5 text-[10px] font-medium text-gigo-orange">New</span>
+						</div>
+						<div class="p-4">
+							<NotificationStorm autoStart maxVisible={5} />
+						</div>
+					</div>
+
+					<div class="rounded-xl border border-(--border) bg-(--surface-1) overflow-hidden">
+						<div class="border-b border-(--border) bg-(--surface-2) px-4 py-2.5 flex items-center gap-2">
+							<span class="text-xs">🤖</span>
+							<span class="text-xs font-semibold">CaptchaFromHell</span>
+							<span class="ml-auto rounded-md bg-gigo-orange/10 px-2 py-0.5 text-[10px] font-medium text-gigo-orange">New</span>
+						</div>
+						<div class="p-4">
+							<CaptchaFromHell onverify={() => alert('Verified! ...how?!')} />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="gigo-divider"></div>
+
+		<!-- Code Example Showcase -->
+		<section class="py-14">
+			<div class="text-center">
+				<h2 class="text-2xl font-bold tracking-tight">Ship of Horrors in 3 Lines</h2>
+				<p class="mt-2 text-sm text-(--muted-foreground)">Every component follows the same clean Svelte 5 patterns.</p>
+			</div>
+			<div class="mx-auto mt-8 max-w-2xl overflow-hidden rounded-xl border border-(--border) bg-(--surface-1)">
+				<div class="flex items-center gap-2 border-b border-(--border) bg-(--surface-2) px-4 py-2">
+					<span class="h-2.5 w-2.5 rounded-full bg-gigo-red/60"></span>
+					<span class="h-2.5 w-2.5 rounded-full bg-gigo-yellow/60"></span>
+					<span class="h-2.5 w-2.5 rounded-full bg-gigo-lime/60"></span>
+					<span class="ml-2 text-xs font-mono text-(--muted-foreground)">App.svelte</span>
+				</div>
+				<pre class="overflow-x-auto p-5 font-mono text-sm leading-relaxed"><span class="text-gigo-magenta">&lt;script lang="ts"&gt;</span>
+  <span class="text-(--muted-foreground)">import</span> {'{'} <span class="text-gigo-cyan">ShatterPane</span>, <span class="text-gigo-cyan">CatchSubmit</span>, <span class="text-gigo-cyan">CookieMonster</span> {'}'} <span class="text-(--muted-foreground)">from</span> <span class="text-gigo-lime">'@gigo-ui/components'</span>;
+
+  <span class="text-(--muted-foreground)">let</span> broken = <span class="text-gigo-magenta">$state</span>(<span class="text-gigo-cyan">false</span>);
+<span class="text-gigo-magenta">&lt;/script&gt;</span>
+
+<span class="text-gigo-cyan">&lt;ShatterPane</span> <span class="text-gigo-lime">bind:isShattered</span>={'{'}broken{'}'}<span class="text-gigo-cyan">&gt;</span>
+  <span class="text-(--muted-foreground)">&lt;div class="card"&gt;</span>
+    <span class="text-(--foreground)">&lt;h2&gt;Fragile Content&lt;/h2&gt;</span>
+    <span class="text-gigo-cyan">&lt;CatchSubmit</span> <span class="text-gigo-lime">label</span>="Submit" <span class="text-gigo-cyan">/&gt;</span>
+  <span class="text-(--muted-foreground)">&lt;/div&gt;</span>
+<span class="text-gigo-cyan">&lt;/ShatterPane&gt;</span>
+
+<span class="text-gigo-cyan">&lt;CookieMonster</span> <span class="text-gigo-lime">onaccept</span>={'{'}() => console.log('gotcha'){'}'} <span class="text-gigo-cyan">/&gt;</span></pre>
 			</div>
 		</section>
 
@@ -160,6 +383,9 @@
 			</p>
 			<p class="mt-1 text-xs text-(--muted-foreground)">
 				Every interaction is designed to make you question your life choices.
+			</p>
+			<p class="mt-2 text-[10px] text-(--muted-foreground)/50">
+				<a href="/llms.txt" class="hover:text-gigo-magenta transition-colors">llms.txt</a> · <a href="/llms-full.txt" class="hover:text-gigo-magenta transition-colors">llms-full.txt</a> · MIT License
 			</p>
 		</div>
 	</footer>
