@@ -1,0 +1,784 @@
+# GIGO UI — Full Reference
+
+> @gigo-ui/components v1.0.1
+> A Svelte 5 component library of intentionally terrible UI patterns.
+> Every component is production-quality code implementing the worst UX ideas imaginable.
+> Built with Svelte 5 runes, TypeScript 5, Tailwind CSS 4.
+
+---
+
+## Installation
+
+```bash
+pnpm add @gigo-ui/components
+# or: npm install @gigo-ui/components
+# or: yarn add @gigo-ui/components
+```
+
+### Required: Import Global Styles
+
+```svelte
+<script lang="ts">
+  import '@gigo-ui/components/globals.css';
+</script>
+```
+
+The stylesheet includes Tailwind v4 directives and @source scanning. Utility classes used inside components are generated in consumer builds.
+
+### Theme Customization
+
+Override CSS variables after importing:
+
+```css
+@import "@gigo-ui/components/globals.css";
+
+:root {
+  --primary: #2563eb;
+  --background: #ffffff;
+  --foreground: #111827;
+}
+```
+
+---
+
+## Component Reference
+
+### Category: BadUI Collection
+
+Components that technically work, but make you wish they didn't.
+
+---
+
+#### GhostCard
+
+A card that randomly vanishes and reappears in a glitched state.
+
+```svelte
+<script lang="ts">
+  import { GhostCard } from '@gigo-ui/components';
+</script>
+
+<GhostCard title="Important Info" description="This content may vanish at any moment." />
+```
+
+Props:
+- title (string, default: 'Ghost Card') — Card heading text
+- description (string, default: '') — Card body text
+- class (string, default: '') — Additional CSS classes
+- disappearMinMs (number, default: 2000) — Minimum time before disappearing (ms)
+- disappearMaxMs (number, default: 5000) — Maximum time before disappearing (ms)
+- glitchChance (number, default: 0.6) — Probability of glitch on reappear (0-1)
+
+---
+
+#### GravityInput
+
+Characters fall with gravity as you type.
+
+```svelte
+<script lang="ts">
+  import { GravityInput } from '@gigo-ui/components';
+  let value = $state('');
+</script>
+
+<GravityInput bind:value placeholder="Type something..." />
+```
+
+Props:
+- value (string, default: '', bindable) — Current input value
+- placeholder (string, default: '') — Placeholder text
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### RotaryDial
+
+Rotary phone dial for number input. Drag to dial digits.
+
+```svelte
+<script lang="ts">
+  import { RotaryDial } from '@gigo-ui/components';
+  let number = $state('');
+</script>
+
+<RotaryDial bind:value={number} maxDigits={10} />
+```
+
+Props:
+- value (string, default: '', bindable) — Dialed number string
+- maxDigits (number, default: 10) — Maximum digits allowed
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### SliderPhone
+
+Enter phone numbers using a single slider.
+
+```svelte
+<script lang="ts">
+  import { SliderPhone } from '@gigo-ui/components';
+  let phone = $state('');
+</script>
+
+<SliderPhone bind:value={phone} digitCount={10} />
+```
+
+Props:
+- value (string, default: '', bindable) — Current phone number
+- digitCount (number, default: 10) — Number of digits to enter
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### CatchSubmit
+
+Submit button that physically runs from your cursor.
+
+```svelte
+<script lang="ts">
+  import { CatchSubmit } from '@gigo-ui/components';
+</script>
+
+<CatchSubmit label="Submit Form" onsubmit={() => console.log('Caught!')} />
+```
+
+Props:
+- label (string, default: 'Submit') — Button label text
+- onsubmit (() => void, optional) — Fires when user catches and clicks the button
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### DropdownCalc
+
+Basic arithmetic using dropdown menus.
+
+```svelte
+<script lang="ts">
+  import { DropdownCalc } from '@gigo-ui/components';
+  let result = $state('');
+</script>
+
+<DropdownCalc bind:value={result} />
+```
+
+Props:
+- value (string, default: '', bindable) — Calculation result
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### PasswordPeekhole
+
+Tiny draggable circle to view masked password characters.
+
+```svelte
+<script lang="ts">
+  import { PasswordPeekhole } from '@gigo-ui/components';
+  let pw = $state('');
+</script>
+
+<PasswordPeekhole bind:value={pw} placeholder="Enter password..." />
+```
+
+Props:
+- value (string, default: '', bindable) — Password value
+- placeholder (string, default: '') — Placeholder text
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### VolumeSlider
+
+Deliberately confusing volume control.
+
+```svelte
+<script lang="ts">
+  import { VolumeSlider } from '@gigo-ui/components';
+  let vol = $state(50);
+</script>
+
+<VolumeSlider bind:value={vol} />
+```
+
+Props:
+- value (number, default: 50, bindable) — Volume level
+- min (number, default: 0) — Minimum value
+- max (number, default: 100) — Maximum value
+- step (number, default: 1) — Step increment
+- invertDirection (boolean, default: false) — Invert slider direction
+- jumpAround (boolean, default: false) — Random value jumps
+- fakeLabels (boolean, default: false) — Show misleading labels
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### ProgressDoom
+
+Progress bar that regresses and lies about completion.
+
+```svelte
+<script lang="ts">
+  import { ProgressDoom } from '@gigo-ui/components';
+</script>
+
+<ProgressDoom targetMs={8000} onComplete={() => alert('Done!')} />
+```
+
+Props:
+- targetMs (number, default: 5000) — Target completion time in ms
+- goBackwards (boolean, default: false) — Progress regresses
+- stall (boolean, default: false) — Progress stalls randomly
+- lieAboutCompletion (boolean, default: false) — Fake 100% then restart
+- onComplete (() => void, optional) — Fires on genuine completion
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### ColorPickerWrong
+
+A color picker that deliberately picks the wrong color.
+
+```svelte
+<script lang="ts">
+  import { ColorPickerWrong } from '@gigo-ui/components';
+  let color = $state('#e040fb');
+</script>
+
+<ColorPickerWrong bind:value={color} />
+```
+
+Props:
+- value (string, default: '#e040fb', bindable) — Selected color
+- offsetHue (boolean, default: false) — Shift hue from selection
+- swapChannels (boolean, default: false) — Swap RGB channels
+- delayUpdate (boolean, default: false) — Delayed color updates
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### TermsSidescroll
+
+Terms of service presented in a horizontal scroller.
+
+```svelte
+<script lang="ts">
+  import { TermsSidescroll } from '@gigo-ui/components';
+  let accepted = $state(false);
+</script>
+
+<TermsSidescroll bind:accepted />
+```
+
+Props:
+- content (string, optional) — Terms text content
+- accepted (boolean, default: false, bindable) — Acceptance state
+- rotateText (boolean, default: false) — Rotate text randomly
+- scrambleOnScroll (boolean, default: false) — Scramble text while scrolling
+- sidewaysScroll (boolean, default: false) — Force horizontal scrolling
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### CookieMonster
+
+Dark pattern cookie consent banner from everyone's nightmares.
+
+```svelte
+<script lang="ts">
+  import { CookieMonster } from '@gigo-ui/components';
+  let showCookies = $state(true);
+</script>
+
+<CookieMonster
+  bind:visible={showCookies}
+  onaccept={() => console.log('Accepted')}
+  onreject={() => console.log('Rejected')}
+/>
+```
+
+Props:
+- visible (boolean, default: true, bindable) — Controls banner visibility
+- onaccept (() => void, optional) — Fires when user accepts (or is tricked)
+- onreject (() => void, optional) — Fires if user manages to reject
+- class (string, default: '') — Additional CSS classes
+
+Features:
+- Giant pulsing "Accept All" button
+- Microscopic reject button that flees from cursor
+- Fake ✕ button that actually accepts cookies
+- Banner grows larger with each dismissal attempt
+- Shame-based decline copy that escalates
+
+---
+
+#### NotificationStorm
+
+Hydra-style toast notifications that multiply when dismissed.
+
+```svelte
+<script lang="ts">
+  import { NotificationStorm } from '@gigo-ui/components';
+</script>
+
+<NotificationStorm autoStart maxVisible={6} />
+```
+
+Props:
+- autoStart (boolean, default: true) — Auto-spawn initial notifications
+- maxVisible (number, default: 8) — Maximum visible toasts
+- class (string, default: '') — Additional CSS classes
+
+Features:
+- Every dismissed toast spawns 2 replacements
+- "Mark All Read" generates 10 more
+- Absurd messages with color-coded severity
+- Real-time stats tracking dismissed vs spawned
+
+---
+
+#### CaptchaFromHell
+
+Multi-stage impossible CAPTCHA verification.
+
+```svelte
+<script lang="ts">
+  import { CaptchaFromHell } from '@gigo-ui/components';
+</script>
+
+<CaptchaFromHell onverify={() => console.log('Verified')} />
+```
+
+Props:
+- onverify (() => void, optional) — Fires when user passes (unlikely)
+- class (string, default: '') — Additional CSS classes
+
+Features:
+- Stage 1: Select images containing "existential dread"
+- Stage 2: Solve unsolvable math (0÷0, P=NP?)
+- Stage 3: Slider with moving target and time pressure
+- Skip button appears after 4 failed attempts
+
+---
+
+### Category: Classic Chaos
+
+Standard UI elements enhanced with destruction overlays and chaos physics.
+
+---
+
+#### GigoCompactor
+
+Voxel-crushes UI into 3D physics debris using Three.js + Rapier3D WASM.
+
+```svelte
+<script lang="ts">
+  import { GigoCompactor } from '@gigo-ui/components';
+  let compactor: GigoCompactor;
+</script>
+
+<GigoCompactor bind:this={compactor} cols={20} rows={20} intensity={8}>
+  <div class="card">This will be voxelized</div>
+</GigoCompactor>
+
+<button onclick={() => compactor.crush()}>Crush</button>
+<button onclick={() => compactor.restore()}>Restore</button>
+```
+
+Props:
+- isGarbage (boolean, default: false) — Trigger the crush
+- cols (number, default: 20) — Voxel grid columns
+- rows (number, default: 20) — Voxel grid rows
+- intensity (number, default: 7) — Crush force 0-10
+- debugMode (boolean, default: false) — Show bounding box
+- class (string, default: '') — Additional CSS classes
+- children (Snippet, required) — Slot content to wrap and destroy
+
+Methods:
+- crush() — Trigger the voxel crush
+- restore() — Reset to original state
+
+---
+
+#### ShatterPane
+
+Voronoi glass fracture with 2D physics simulation.
+
+```svelte
+<script lang="ts">
+  import { ShatterPane } from '@gigo-ui/components';
+  let pane: ShatterPane;
+</script>
+
+<ShatterPane bind:this={pane} shardCount={64} intensity={8}>
+  <div class="card">Fragile content</div>
+</ShatterPane>
+
+<button onclick={() => pane.shatter()}>Shatter</button>
+<button onclick={() => pane.restore()}>Restore</button>
+```
+
+Props:
+- isShattered (boolean, default: false) — Trigger the shatter
+- shardCount (number, default: 32) — Number of glass shards
+- intensity (number, default: 7) — Shatter force
+- tint (string, optional) — Shard tint color
+- debugMode (boolean, default: false) — Show debug info
+- class (string, default: '') — Additional CSS classes
+
+Methods:
+- shatter() — Trigger the glass fracture
+- restore() — Reset to original state
+
+---
+
+#### PixelDissolve
+
+Per-pixel dissolution in spreading contagion waves.
+
+```svelte
+<script lang="ts">
+  import { PixelDissolve } from '@gigo-ui/components';
+  let dissolve: PixelDissolve;
+</script>
+
+<PixelDissolve bind:this={dissolve} resolution={2} waveSeed={12}>
+  <div class="card">Half the universe</div>
+</PixelDissolve>
+
+<button onclick={() => dissolve.dissolve()}>Snap</button>
+```
+
+Props:
+- isDead (boolean, default: false) — Trigger dissolution
+- resolution (number, default: 4) — Pixel block size
+- waveSeed (number, default: 0) — Wave pattern seed
+- intensity (number, default: 7) — Dissolution force
+- debugMode (boolean, default: false) — Show debug info
+- class (string, default: '') — Additional CSS classes
+
+Methods:
+- dissolve() — Trigger pixel dissolution
+- restore() — Reset to original state
+
+---
+
+#### BlackHoleSink
+
+Gravitational singularity with accretion disk effect.
+
+```svelte
+<script lang="ts">
+  import { BlackHoleSink } from '@gigo-ui/components';
+  let hole: BlackHoleSink;
+</script>
+
+<BlackHoleSink bind:this={hole} intensity={8} glowColor="rgba(255,140,0,0.8)">
+  <div class="card">Event Horizon</div>
+</BlackHoleSink>
+
+<button onclick={() => hole.consume()}>Consume</button>
+```
+
+Props:
+- isConsumed (boolean, default: false) — Trigger consumption
+- resolution (number, default: 4) — Render resolution
+- intensity (number, default: 7) — Gravitational force
+- glowColor (string, optional) — Accretion glow color
+- debugMode (boolean, default: false) — Show debug info
+- class (string, default: '') — Additional CSS classes
+
+Methods:
+- consume() — Trigger black hole consumption
+- restore() — Reset to original state
+
+---
+
+#### ChaosButton
+
+Button with random chaos effects — CSS transforms, color shifts, text changes.
+
+```svelte
+<script lang="ts">
+  import { ChaosButton } from '@gigo-ui/components';
+</script>
+
+<ChaosButton label="Try to Click Me" onclick={() => alert('Caught!')} />
+```
+
+Props:
+- label (string, default: 'Click Me') — Button label
+- onclick (MouseEventHandler, optional) — Click handler
+- class (string, default: '') — Additional CSS classes
+
+---
+
+#### ChaosForm
+
+Form that actively fights user input.
+
+```svelte
+<script lang="ts">
+  import { ChaosForm } from '@gigo-ui/components';
+</script>
+
+<ChaosForm onsubmit={(data) => console.log(data)} />
+```
+
+Props:
+- onsubmit ((data: Record<string, string>) => void, optional) — Submit handler
+- class (string, default: '') — Additional CSS classes
+
+---
+
+### Category: Standard UI
+
+Well-built base components with optional chaos toggles.
+
+---
+
+#### Button
+
+Standard button with variants and optional chaos mode.
+
+```svelte
+<script lang="ts">
+  import { Button } from '@gigo-ui/components';
+</script>
+
+<Button variant="default" size="md">Click Me</Button>
+<Button variant="chaos-nightmare" chaos multiClickRequired={5}>Multi-Click</Button>
+```
+
+Props:
+- variant ('default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'chaos-primary' | 'chaos-destructive' | 'chaos-nightmare')
+- size ('xs' | 'sm' | 'md' | 'lg' | 'xl' | 'chaos-sm' | 'chaos-lg' | 'chaos-xl')
+- disabled (boolean) — Disabled state
+- loading (boolean) — Loading state
+- chaos (boolean) — Enable chaos mode
+- escapeOnHover (boolean) — Button moves on hover
+- randomizeText (boolean) — Randomize button text
+- multiClickRequired (number) — Clicks needed to trigger
+
+---
+
+#### Input
+
+Text input with optional chaos features.
+
+```svelte
+<script lang="ts">
+  import { Input } from '@gigo-ui/components';
+  let val = $state('');
+</script>
+
+<Input bind:value={val} placeholder="Normal input..." />
+<Input chaos randomDelete fakeValidation placeholder="Chaos input..." />
+```
+
+Props:
+- type ('text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search')
+- value (string, bindable) — Input value
+- placeholder (string) — Placeholder text
+- chaos (boolean) — Enable chaos mode
+- randomDelete (boolean) — Randomly delete characters
+- fakeValidation (boolean) — Show fake validation errors
+- escapeOnFocus (boolean) — Input moves when focused
+- randomizeType (boolean) — Input type changes randomly
+
+---
+
+#### Modal
+
+Dialog overlay with chaos behaviors.
+
+```svelte
+<script lang="ts">
+  import { Modal, Button } from '@gigo-ui/components';
+  let open = $state(false);
+</script>
+
+<Button onclick={() => open = true}>Open Modal</Button>
+<Modal bind:open title="Dialog" chaos resistClose escapeModal>
+  {#snippet children()}
+    <p>Try closing this.</p>
+  {/snippet}
+</Modal>
+```
+
+Props:
+- open (boolean, bindable) — Visibility state
+- title (string) — Modal title
+- chaos (boolean) — Enable chaos mode
+- resistClose (boolean) — Resist close attempts
+- escapeModal (boolean) — Modal moves away from close
+- fakeCloseButtons (boolean) — Add fake close buttons
+- spawnMoreModals (boolean) — Closing spawns new modals
+
+---
+
+#### Card
+
+Content card with 3D tilt and optional chaos rotation.
+
+```svelte
+<script lang="ts">
+  import { Card } from '@gigo-ui/components';
+</script>
+
+<Card title="My Card" description="Card description">
+  {#snippet children()}
+    <p>Card content</p>
+  {/snippet}
+</Card>
+```
+
+Props:
+- title (string) — Card heading
+- description (string) — Card description
+- chaos (boolean) — Enable chaos mode
+- randomRotation (boolean) — Random rotation
+- resistClicks (boolean) — Resist click interactions
+- zIndexWar (boolean) — Chaotic z-index changes
+
+---
+
+#### Carousel
+
+Image carousel with chaos features.
+
+Props:
+- slides (CarouselSlide[]) — Array of { id, content, image? }
+- autoplay (boolean) — Enable autoplay
+- interval (number) — Autoplay interval ms
+- chaos (boolean) — Enable chaos
+- lyingNavigation (boolean) — Navigation lies about direction
+- reverseDirection (boolean) — Reverse slide direction
+- randomJumps (boolean) — Random slide jumps
+
+---
+
+#### Form
+
+Form container with chaos features.
+
+Props:
+- fields (FormField[]) — Array of { id, label, type, placeholder?, required? }
+- submitLabel (string) — Submit button text
+- chaos (boolean) — Enable chaos mode
+- randomReset (boolean) — Randomly reset form data
+- fakeValidation (boolean) — Show fake validation errors
+- alwaysFails (boolean) — Submission always fails
+- shuffleFields (boolean) — Shuffle field order
+
+---
+
+#### Navigation
+
+Navigation component with misdirection.
+
+Props:
+- items (NavItem[]) — Array of { id, label, href, icon? }
+- chaos (boolean) — Enable chaos mode
+- wrongDestinations (boolean) — Links go to wrong pages
+- randomReorder (boolean) — Randomly reorder navigation
+- fakeLoading (boolean) — Show fake loading states
+
+---
+
+## Utility Functions
+
+```typescript
+import { cn, chaosClasses, chaosRandom, chaosPickOne, randomGarbageText } from '@gigo-ui/components';
+```
+
+### cn(...inputs: ClassValue[]): string
+Merges CSS class names using clsx + tailwind-merge. Resolves Tailwind class conflicts.
+
+### chaosClasses(level: number): string
+Generates chaos CSS classes based on intensity level (0-10):
+- Level 2+: Random chaos colors
+- Level 4+: Random transforms (rotate, skew, scale)
+- Level 6+: Random animations (jitter, wiggle, shake, glitch)
+- Level 8+: Chaos font
+- Level 10: Nightmare mode (full chaos)
+
+### chaosRandom(max: number): number
+Returns random integer from 0 to max-1.
+
+### chaosPickOne<T>(items: T[]): T
+Returns a random element from an array.
+
+### randomGarbageText(): string
+Returns a random garbage string from: ERROR, undefined, NaN, 404, null, ???, LOADING..., no., HELP, bruh, :(, segfault, lol, oops, yeet, 💀
+
+---
+
+## CSS Classes & Design Tokens
+
+### Brand Colors (Tailwind classes)
+- text-gigo-magenta / bg-gigo-magenta (#e040fb)
+- text-gigo-lime / bg-gigo-lime (#76ff03)
+- text-gigo-cyan / bg-gigo-cyan (#18ffff)
+- text-gigo-yellow / bg-gigo-yellow (#ffea00)
+- text-gigo-orange / bg-gigo-orange (#ff6e40)
+- text-gigo-pink / bg-gigo-pink (#ff4081)
+- text-gigo-hotpink / bg-gigo-hotpink (#ff69b4)
+- text-gigo-red / bg-gigo-red (#ff1744)
+- text-gigo-blue / bg-gigo-blue (#2979ff)
+- text-gigo-tomato / bg-gigo-tomato (#ff6347)
+
+### Utility CSS Classes
+- .gigo-gradient-border — Animated conic gradient border
+- .gigo-glass — Glassmorphism panel
+- .gigo-gradient-text — Animated gradient text
+- .gigo-neon-text — Neon glow text shadow
+- .gigo-spotlight — Mouse-following spotlight effect
+- .gigo-ripple — Click ripple effect
+- .gigo-shimmer — Shimmer loading effect
+- .gigo-scanlines — CRT scanline overlay
+- .gigo-mesh-bg — Mesh gradient background
+- .gigo-divider — Gradient section divider
+- .gigo-dot — Floating dot decoration
+
+### Animation Classes
+- animate-gigo-jitter — Rapid position jitter
+- animate-gigo-wiggle — Rotation wiggle
+- animate-gigo-flash — Opacity flash
+- animate-gigo-shake — Horizontal shake
+- animate-gigo-glitch — Position + hue-rotate glitch
+- animate-gigo-chaos — Scale + rotate + hue chaos
+- animate-gigo-nightmare — Full nightmare transforms
+- animate-gigo-teleport — Random teleportation
+- animate-gigo-drunk — Drunk swaying motion
+- animate-gigo-float — Gentle float up/down
+- animate-gigo-pulse-glow — Opacity pulse glow
+- animate-gigo-gradient — Background gradient shift
+- animate-gigo-shimmer — Horizontal shimmer sweep
+- animate-gigo-entrance — Fade-in-up entrance
+
+---
+
+## Surface Elevation Scale (CSS Variables)
+
+Dark mode (default):
+- --surface-0: #07070d
+- --surface-1: #0e0e16
+- --surface-2: #14141e
+- --surface-3: #1a1a28
+- --border: rgba(255, 255, 255, 0.07)
+
+---
+
+## Requirements
+
+- Svelte 5.0+
+- SvelteKit 2.0+
+- Tailwind CSS 4.0+
+- TypeScript 5.0+
+- Node.js 20+
+
+## License
+
+MIT

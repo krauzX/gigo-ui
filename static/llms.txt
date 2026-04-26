@@ -1,0 +1,105 @@
+# GIGO UI
+
+> A Svelte 5 component library of intentionally terrible UI patterns. Every component is production-quality code implementing the worst UX ideas imaginable.
+
+Built with Svelte 5 runes ($state, $derived, $effect, $bindable), TypeScript 5, and Tailwind CSS 4.
+
+## Install
+
+```bash
+pnpm add @gigo-ui/components
+```
+
+Import styles once near your app root:
+
+```svelte
+<script lang="ts">
+  import '@gigo-ui/components/globals.css';
+</script>
+```
+
+## Components
+
+### BadUI Collection (14 components)
+Technically functional. Emotionally devastating.
+
+- GhostCard: Card that randomly vanishes and reappears glitched
+- GravityInput: Characters fall with gravity as you type
+- RotaryDial: Rotary phone dial for number input
+- SliderPhone: Single slider for entering phone numbers
+- CatchSubmit: Submit button that runs from your cursor
+- DropdownCalc: Dropdown menus for basic arithmetic
+- PasswordPeekhole: Tiny draggable circle to view password
+- VolumeSlider: Deliberately confusing volume control
+- ProgressDoom: Progress bar that regresses randomly
+- ColorPickerWrong: Color picker that picks the wrong color
+- TermsSidescroll: Terms of service in a horizontal scroller
+- CookieMonster: Cookie banner from hell with dark patterns
+- NotificationStorm: Toast notifications that multiply on dismiss
+- CaptchaFromHell: Impossible multi-stage CAPTCHA verification
+
+### Chaos (Destruction Overlays — 6 components)
+Wrap any component. One function call and it's physically destroyed.
+
+- GigoCompactor: Voxel crush implosion (Three.js + Rapier3D WASM)
+- ShatterPane: Voronoi glass fracture (Canvas2D + physics sim)
+- PixelDissolve: Per-pixel wave contagion (Canvas2D particles)
+- BlackHoleSink: Gravitational singularity (Canvas2D warp + glow)
+- ChaosButton: Button with random chaos effects (CSS transforms)
+- ChaosForm: Form that fights back (DOM manipulation)
+
+### Standard UI (7 components)
+Normal, usable components to lull users into a false sense of security.
+
+- Button: Standard button with variant/size props and chaos toggles
+- Card: Content card with 3D tilt and optional chaos rotation
+- Carousel: Image carousel with lying navigation and reverse direction
+- Form: Form container with random reset, fake validation, field shuffle
+- Input: Text input with random deletion, fake validation, chaos escape
+- Modal: Dialog overlay that resists closing, spawns more modals
+- Navigation: Nav component with wrong destinations, random reorder
+
+## Breaker Overlay API
+
+Each overlay lazy-loads its engine only when triggered. Zero cost until destruction begins.
+
+| Overlay       | Methods                    | Prop          | Bundle Size           |
+|---------------|----------------------------|---------------|-----------------------|
+| GigoCompactor | crush() / restore()        | isGarbage     | ~180KB (Three+Rapier) |
+| ShatterPane   | shatter() / restore()      | isShattered   | ~2KB                  |
+| PixelDissolve | dissolve() / restore()     | isDead        | ~2KB                  |
+| BlackHoleSink | consume() / restore()      | isConsumed    | ~2KB                  |
+
+## Utility Functions
+
+```typescript
+import { cn, chaosClasses, chaosRandom, chaosPickOne, randomGarbageText } from '@gigo-ui/components';
+```
+
+- cn(...classes): Merge Tailwind classes (clsx + tailwind-merge)
+- chaosClasses(level: 0-10): Generate chaos CSS classes by intensity
+- chaosRandom(max): Random integer 0..max-1
+- chaosPickOne(items): Random array element
+- randomGarbageText(): Random garbage string (ERROR, null, 💀, etc.)
+
+## Type Exports
+
+All component prop interfaces are exported:
+
+```typescript
+import type { GigoButtonProps, GigoCardProps, ... } from '@gigo-ui/components';
+```
+
+## Requirements
+
+- Svelte 5.0+
+- SvelteKit 2.0+
+- Tailwind CSS 4.0+
+- TypeScript 5.0+
+- Node.js 20+
+
+## Links
+
+- Docs: /docs
+- GitHub: https://github.com/gigo-ui/components
+- License: MIT
